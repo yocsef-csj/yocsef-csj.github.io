@@ -2,8 +2,9 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YOCSEF CSJ — Coming Soon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#05060a">
+  <title>Embodied Intelligence White Paper · 具身智能白皮书</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Serif+SC:wght@400;600&display=swap" rel="stylesheet">
@@ -21,13 +22,14 @@
     }
 
     html, body {
-      height: 100%;
+      min-height: 100%;
       width: 100%;
-      overflow: hidden;
+      overflow-x: hidden;
       background: var(--bg-0);
       color: var(--text);
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
     }
 
     /* 动态渐变背景 */
@@ -80,12 +82,13 @@
     .wrap {
       position: relative;
       z-index: 2;
-      height: 100vh;
+      min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 32px;
+      padding: max(32px, env(safe-area-inset-top)) 32px max(96px, calc(env(safe-area-inset-bottom) + 88px));
       text-align: center;
     }
 
@@ -94,15 +97,19 @@
       align-items: center;
       gap: 8px;
       padding: 6px 14px;
+      max-width: calc(100vw - 48px);
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 999px;
-      font-size: 12px;
+      font-size: clamp(10px, 1.4vw, 12px);
       letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--text-dim);
       backdrop-filter: blur(10px);
       background: rgba(255, 255, 255, 0.03);
       margin-bottom: 28px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
       opacity: 0;
       animation: fade-up 1s ease-out 0.2s forwards;
     }
@@ -124,8 +131,9 @@
     h1 {
       font-size: clamp(48px, 11vw, 144px);
       font-weight: 800;
-      line-height: 1.02;
+      line-height: 1.15;
       letter-spacing: -0.04em;
+      padding-bottom: 0.08em;
       background: linear-gradient(120deg, #ffffff 0%, #c6c0ff 35%, #8fe6ff 65%, #ffffff 100%);
       background-size: 200% 100%;
       -webkit-background-clip: text;
@@ -141,20 +149,20 @@
 
     .zh {
       font-family: 'Noto Serif SC', serif;
-      font-size: clamp(16px, 2.2vw, 22px);
-      font-weight: 400;
-      color: var(--text-dim);
-      letter-spacing: 0.3em;
-      margin-top: 18px;
+      font-size: clamp(18px, 2.6vw, 28px);
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: 0.25em;
+      margin-top: 22px;
       opacity: 0;
       animation: fade-up 1s ease-out 0.7s forwards;
     }
 
     .tagline {
-      max-width: 560px;
+      max-width: 640px;
       margin-top: 28px;
       font-size: clamp(14px, 1.6vw, 17px);
-      line-height: 1.6;
+      line-height: 1.8;
       color: var(--text-dim);
       opacity: 0;
       animation: fade-up 1s ease-out 0.9s forwards;
@@ -169,22 +177,44 @@
       animation: fade-up 1s ease-out 1.1s forwards;
     }
 
-    .meta {
-      display: flex;
-      gap: 32px;
-      font-size: 13px;
-      color: var(--text-dim);
-      letter-spacing: 0.05em;
+    .orgs {
+      text-align: center;
       opacity: 0;
       animation: fade-up 1s ease-out 1.3s forwards;
     }
 
-    .meta strong {
-      display: block;
-      color: var(--text);
-      font-weight: 600;
-      margin-bottom: 4px;
+    .orgs-label {
+      font-size: 11px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 18px;
+    }
+
+    .orgs-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      max-width: 720px;
+    }
+
+    .org {
+      padding: 8px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 999px;
+      font-size: 13px;
       letter-spacing: 0.02em;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.04);
+      backdrop-filter: blur(10px);
+      transition: border-color 0.25s, background 0.25s, transform 0.25s;
+    }
+
+    .org:hover {
+      border-color: rgba(255, 255, 255, 0.28);
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
     }
 
     @keyframes fade-up {
@@ -195,9 +225,10 @@
     /* 底部署名 */
     footer {
       position: fixed;
-      bottom: 24px;
+      bottom: max(24px, env(safe-area-inset-bottom));
       left: 0;
       right: 0;
+      padding: 0 16px;
       text-align: center;
       font-size: 12px;
       color: var(--text-dim);
@@ -214,8 +245,54 @@
     }
     footer a:hover { color: var(--text); }
 
-    @media (max-width: 540px) {
-      .meta { flex-direction: column; gap: 16px; }
+    /* iPad 竖屏及以下 */
+    @media (max-width: 900px) {
+      .wrap { padding-left: 24px; padding-right: 24px; }
+      .tagline { max-width: 92%; }
+    }
+
+    /* 手机 */
+    @media (max-width: 600px) {
+      .wrap {
+        padding-top: max(20px, env(safe-area-inset-top));
+        padding-left: 18px;
+        padding-right: 18px;
+        padding-bottom: max(88px, calc(env(safe-area-inset-bottom) + 80px));
+      }
+      .badge { letter-spacing: 0.15em; padding: 5px 12px; margin-bottom: 22px; }
+      h1 { font-size: clamp(46px, 14vw, 88px); letter-spacing: -0.03em; }
+      .zh { font-size: clamp(16px, 4.5vw, 22px); letter-spacing: 0.2em; margin-top: 18px; }
+      .tagline { font-size: 14px; line-height: 1.7; margin-top: 22px; }
+      .divider { margin: 28px 0 22px; }
+      .orgs-label { font-size: 10px; letter-spacing: 0.28em; margin-bottom: 14px; }
+      .orgs-list { gap: 8px; }
+      .org { font-size: 12px; padding: 7px 13px; }
+      footer { font-size: 10px; letter-spacing: 0.12em; }
+      /* 移动端降低光斑滤镜强度,缓解低端机卡顿 */
+      .orb { filter: blur(50px); opacity: 0.5; }
+    }
+
+    /* 超窄屏 */
+    @media (max-width: 360px) {
+      h1 { font-size: 42px; }
+      .badge { font-size: 9.5px; }
+      .org { font-size: 11.5px; padding: 6px 11px; }
+    }
+
+    /* 横屏 / 矮屏:让内容自然滚动,避免裁切 */
+    @media (max-height: 620px) {
+      .wrap {
+        justify-content: flex-start;
+        padding-top: 48px;
+        padding-bottom: 96px;
+      }
+      footer { position: relative; bottom: auto; margin-top: 32px; padding-bottom: 16px; }
+    }
+
+    /* 用户偏好减少动效 */
+    @media (prefers-reduced-motion: reduce) {
+      .bg, .orb, h1, .dot { animation: none !important; }
+      .badge, .zh, .tagline, .divider, .orgs, footer { animation-duration: 0.001s !important; }
     }
   </style>
 </head>
@@ -227,19 +304,25 @@
   <div class="grain"></div>
 
   <main class="wrap">
-    <span class="badge"><span class="dot"></span>YOCSEF · CSJ</span>
+    <span class="badge"><span class="dot"></span>Embodied Intelligence White Paper</span>
     <h1>Coming&nbsp;Soon</h1>
-    <p class="zh">敬 · 请 · 期 · 待</p>
-    <p class="tagline">Our new home is on the way. We're crafting something worth the wait.</p>
+    <p class="zh">具身智能 · 白皮书</p>
+    <p class="tagline">由 CCF YOCSEF 长三角五地联合发起,汇聚学界与产业界视角,共同绘制中国具身智能的发展图景。白皮书即将发布,敬请期待。</p>
     <div class="divider"></div>
-    <div class="meta">
-      <div><strong>YOCSEF CSJ</strong>Young Computer Scientists &amp; Engineers Forum</div>
-      <div><strong>Status</strong>Under Construction</div>
+    <div class="orgs">
+      <div class="orgs-label">联合发起 · Jointly Initiated by</div>
+      <div class="orgs-list">
+        <span class="org">CCF YOCSEF 上海</span>
+        <span class="org">CCF YOCSEF 杭州</span>
+        <span class="org">CCF YOCSEF 合肥</span>
+        <span class="org">CCF YOCSEF 南京</span>
+        <span class="org">CCF YOCSEF 苏州</span>
+      </div>
     </div>
   </main>
 
   <footer>
-    &copy; <span id="year"></span> YOCSEF CSJ. All rights reserved.
+    &copy; <span id="year"></span> CCF YOCSEF 长三角 · All rights reserved.
   </footer>
 
   <script>
